@@ -46,8 +46,8 @@
 
 /* color pallette */
 :root {
-  --main-color: #2f2721;
-  --primary-color: #d3ad7f;
+  --main-color: #075275;
+  --primary-color: #859294;
   --light-white: #fff6eb;
   --light-gray: #ccc;
   --black: #13131a;
@@ -224,16 +224,17 @@ li{
 
 /* home */
 .home {
-  min-height: 100vh;
+  min-height: 75.6vh;
   display: flex;
   align-items: conter;
-  background: url("https://images.pexels.com/photos/851555/pexels-photo-851555.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-  background-size: cover;
-  background-position: center;
+  background: url("https://www.ahdcvets.com/assets/mainstages/mainstage-v1-bg.jpg");
+  background-size: fill;
+  background-position: 100%;
 }
 
 .home .content {
   min-width: 60rem;
+  margin-top: 150px;
 }
 
 .home .content h3 {
@@ -295,6 +296,10 @@ li{
   text-align: center;
   background: var(--main-color);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-blend-mode: multiply;
 }
 
 .menu .box-container .box:hover {
@@ -302,7 +307,8 @@ li{
 }
 
 .menu .box-container .box img {
-  height: 10rem;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
 }
 
@@ -312,10 +318,15 @@ li{
   color: var(--white);
 }
 
-.menu .box-container .box .price {
-  padding: 0.5rem 0;
-  font-size: 2.5rem;
-  color: var(--white);
+
+
+.likes-btn{
+  width: fit-content;
+  height: auto;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 1.8rem;
+  text-align: center;
 }
 
 .menu .box-container .box:hover > * {
@@ -393,53 +404,11 @@ li{
   background: var(--main-color);
 }
 
-.footer .box-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
-}
-
-.footer .box-container .box i {
-  font-size: 3rem;
-  color: var(--primary-color);
-}
-
-.footer .box-container .box h3 {
-  font-size: 2.2rem;
-  text-transform: capitalize;
-  color: var(--white);
-  padding: 1rem 0;
-}
-
-.footer .box-container .box p {
-  font-size: 1.5rem;
-  line-height: 2;
-  color: var(--light-gray);
-  padding: 1rem 0;
-}
-
-.footer .box-container .box .link {
-  display: block;
-  font-size: 1.7rem;
-  line-height: 2;
-  color: var(--primary-color);
-  padding: 0.5rem 0;
-}
-
-.footer .box-container .box .link:hover {
-  color: var(--orange);
-  text-decoration: underline;
-}
-
 .footer .credit {
   color: var(--white);
   text-align: center;
   text-transform: capitalize;
-  margin-top: 3rem;
-  padding-top: 3rem;
-  font-size: 2rem;
-  border-top: 0.1rem solid var(--primary-color);
+  font-size: 1.6rem;
 }
 
 .footer .credit i {
@@ -538,7 +507,7 @@ li{
   min-height: 100vh;
   background-color: var(--bg-color);
   overflow: hidden;
-  background-image: url(https://photoshop-kopona.com/uploads/posts/2019-02/1550441916_32.jpg);
+  /* background-image: url(https://photoshop-kopona.com/uploads/posts/2019-02/1550441916_32.jpg); */
   background-repeat: no-repeat;
   background-size: cover;
 }

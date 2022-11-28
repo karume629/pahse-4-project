@@ -35,7 +35,7 @@ export default function Auth({getUserData}){
       const onRegisterSubmit = (registerData) => handleUserRegistration(registerData);
 
       function handleUserLogin(loginData){ 
-        fetch("/login", {
+        fetch("http://localhost:3000/login", {
             method: "POST",
             headers: {
                 'content-type': 'application/json',
@@ -54,13 +54,13 @@ export default function Auth({getUserData}){
                   pauseOnHover: true,
                   draggable: false,
                   progress: undefined,
-                  theme: "colored",
+                  theme: "dark",
               });
             }
             else{
               getUserData(data)
               console.log(data)
-              toast.success(`Welcome back ${data.username}`, {
+              toast.success("Login success", {
                   position: "top-center",
                   autoClose: 5000,
                   hideProgressBar: false,
@@ -78,7 +78,7 @@ export default function Auth({getUserData}){
 
         function handleUserRegistration(registerData){
             console.log(registerData);
-            fetch("/users", {
+            fetch("http://localhost:3000/users", {
             method: "POST",
             headers: {
                 'content-type': 'application/json',
@@ -105,7 +105,7 @@ export default function Auth({getUserData}){
                 sethasLoggedIn(true)
                 sessionStorage.setItem("user_id", JSON.stringify(data.id))
                 getUserData(data)
-                toast.success(`Registration successfull. Welcome ${data.username} to NewsApp`, {
+                toast.success(`Registration successfull.`, {
                     position: "top-center",
                     autoClose: 7000,
                     hideProgressBar: false,
@@ -159,7 +159,7 @@ export default function Auth({getUserData}){
                         autoComplete="email" placeholder="Email" required="yes" />
                     </div>
                     <div className="input-field">
-                        <input type="url" name="correo" {...register("avatar")} 
+                        <input type="url" name="correo" {...register("pic")} 
                         autoComplete="url" placeholder="Profile URL" required="yes" />
                     </div>
                     <div className="input-field">

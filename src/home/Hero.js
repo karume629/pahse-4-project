@@ -6,13 +6,11 @@ export default function Hero({isAuthenticated}){
             <section id="home" className="home">
                 <div className="content">
                     <h3>
-                    Discover the <br />
-                    taste of real <br />
-                    coffee
+                    KATE'S PET PLANET
                     </h3>
                     {
-                        isAuthenticated ? <Link to="/menu" className="btn">Menu</Link> 
-                        : <Link to="/authentication" className="btn">Login to order</Link>
+                        isAuthenticated ? <Link to="/menu" className="btn">View Pets</Link> 
+                        : <Link to="/authentication" className="btn">Login</Link>
                     }
                 </div>
             </section>

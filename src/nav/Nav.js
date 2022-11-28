@@ -5,7 +5,8 @@ export default function Nav({isAuthenticated, logout, currentUser}){
         <div>
             <header className="header">
                 <Link to="/" className="logo">
-                    coffee shop
+                    <img src="https://icon2.cleanpng.com/20180221/eqw/kisspng-dog-tag-cat-pet-pet-footprints-logo-5a8e35a8643669.3161012915192692884105.jpg"
+                     alt="Pets" width="70" height="60" />
                 </Link>
                 
                 <nav className="navbar">
@@ -14,12 +15,8 @@ export default function Nav({isAuthenticated, logout, currentUser}){
                         isAuthenticated ?
                         <>
                             <Link to="/">Home</Link>
-                            <Link to="/menu">Menu</Link>
-                            <Link to="/order">Order</Link>
-                            <Link to="/about">About</Link>
-
-        
-                            
+                            <Link to="/pets">Pets</Link>
+                            <Link to="/new">New Pet</Link>
                         </>
 
                             :
@@ -35,7 +32,7 @@ export default function Nav({isAuthenticated, logout, currentUser}){
                     isAuthenticated ?                                            
                         <div class="profile-info">
                             <button className="logout" style={{display: "flex", alignItems: "center", marginRight: "10px"}} type="button">
-                            <img alt="avatar" src={currentUser.avatar} width="50" height="50" class="rounded-circle" />
+                            <img alt="avatar" src={currentUser.pic} width="50" height="50" class="rounded-circle" />
                                {currentUser.username}
                             </button>
                             <button className="logout" onClick={logout}>Logout</button>

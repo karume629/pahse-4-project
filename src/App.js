@@ -5,27 +5,25 @@ import Home from './Home';
 import {Routes,Route, useNavigate} from "react-router-dom"
 import { useEffect, useState } from 'react';
 import Nav from './nav/Nav';
-import About from './about/About';
-import Coffees from './home/Coffees';
-import Contact from './about/Contact';
+import Pet from './home/Pet';
 import Footer from './nav/Footer';
 import Auth from './auth/Auth';
-import Order from './home/Order';
+import New from './home/New';
 
 
 function App() {
   const navigate = useNavigate()
   const [errors, setErrors] = useState(false)
-  const [coffees, setCoffees] = useState([])
+  const [pets, setPets] = useState([])
   const [currentUser, setCurrentUser] = useState({})
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
-    fetch("/coffees")
+    fetch("http://localhost:3000/pets")
     .then(res => res.json())
-    .then(data => setCoffees(data))
+    .then(data => setPets(data))
 
-    fetch("/me").then((response) => {
+    fetch("http://localhost:3000/me").then((response) => {
       if (response.status === 200) {
         response.json().then((user) => {
           setIsAuthenticated(true);
@@ -55,13 +53,13 @@ function App() {
     setCurrentUser({})
   }
 
-  function addCoffee(product){
-    fetch("/coffees", {
+  function addPet(pet){
+    fetch("http://localhost:3000/pets", {
       method: "POST",
       headers: {
         'content-type': 'application/json',
       },
-      body: JSON.stringify(product)
+      body: JSON.stringify(pet)
     })
     .then(res => {
       if (res.status === 422) {
@@ -72,21 +70,25 @@ function App() {
       }
       else{
           res.json().then(data => {
-            setCoffees([data, ...coffees])
+            setPets([data, ...pets])
             setErrors(false)
-            alert("Product successfully created.")
+            alert("Pet successfully created.")
           })
       }
   })
   }
 
-  function editProduct(product, id){
-    fetch(`/coffees/${id}`, {
+  function editPet(myPet){
+    let likes = parseInt(myPet.likes, 10)
+    fetch(`http://localhost:3000/pets/${myPet.id}`, {
       method: "PATCH",
       headers: {
         'content-type': 'application/json',
       },
-      body: JSON.stringify(product)
+      body: JSON.stringify({
+        ...myPet,
+        likes: likes += 1 || 1
+      })
     })
     .then(res => {
       if (res.status === 422) {
@@ -96,9 +98,9 @@ function App() {
       }
       else{
           res.json().then(data => {
-            setCoffees([coffees])
+            setPets([pets])
             setErrors(false)
-            navigate(`/product/${data.id}`)
+            navigate(`http://localhost:3000/pets/${data.id}`)
             window.location.reload()
           })
       }
@@ -106,7 +108,7 @@ function App() {
   }
 
   function deleteProduct(product){
-    fetch(`/products/${product.id}`, {
+    fetch(`http://localhost:3000/pets/${product.id}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
@@ -124,10 +126,8 @@ function App() {
       <Nav currentUser={currentUser} isAuthenticated={isAuthenticated} logout={logout} />
       <Routes>
         <Route exact path="/" element={<Home isAuthenticated={isAuthenticated} />}/>
-        <Route exact path="/order" element={<Order currentUser={currentUser} addCoffee={addCoffee} />}/>
-        <Route exact path="/about" element={<About/>}/>
-        <Route exact path="/menu" element={<Coffees coffees={coffees} />}/>
-        <Route exact path="/contact" element={<Contact/>}/>
+        <Route exact path="/new" element={<New currentUser={currentUser} addPet={addPet} />}/>
+        <Route exact path="/pets" element={<Pet editPet={editPet} pets={pets} />}/>
         <Route exact path="/authentication" element={<Auth getUserData={getUserData} />}/>
       </Routes>
       <Footer />
