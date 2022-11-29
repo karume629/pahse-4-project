@@ -9,58 +9,56 @@ export default function SinglePet({currentUser}){
   
   const {id} = useParams()
     useEffect(() => {
-        fetch(`http://localhost:3000/pets/${id}`)
-        .then(res => res.json())
-        .then(data => setsinglePet(data))
+			fetch(`https://pet-store-backend.onrender.com/pets/${id}`)
+				.then((res) => res.json())
+				.then((data) => setsinglePet(data));
+		}, []);
 
-        
-    }, [])
+		function handleComments(comment) {
+			const commentValue = {
+				comment: comment,
+				pet_id: singlePet.id,
+				user_id: currentUser.id,
+			};
+			fetch('https://pet-store-backend.onrender.com/comments', {
+				method: 'POST',
+				headers: { 'content-type': 'application/json' },
+				body: JSON.stringify(commentValue),
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					window.location.reload();
+					alert('Successfully posted your comment');
+				});
+		}
 
-     function handleComments(comment){
-        const commentValue = {
-            comment: comment,
-            pet_id: singlePet.id,
-            user_id: currentUser.id,
-        }
-      fetch("http://localhost:3000/comments", {
-        method:'POST', 
-        headers:{'content-type' : 'application/json'},
-        body: JSON.stringify(commentValue)
-    })
-      .then(res => res.json())
-      .then(data => {
-        window.location.reload()
-        alert("Successfully posted your comment")
-      })
-  
-     }
-
-    function likePost(){
-        let likes = parseInt(singlePet.likes, 10)
-        fetch(`http://localhost:3000/pets/${singlePet.id}`, {
-            method:'PATCH', 
-            headers:{'content-type' : 'application/json'},
-            body: JSON.stringify({
-                likes: likes += 1 || 1
-            })
-        })
-        .then(res => res.json())
-        .then(data => {
-            setsinglePet(data)
-            })
-     }
+		function likePost() {
+			let likes = parseInt(singlePet.likes, 10);
+			fetch(`https://pet-store-backend.onrender.com/pets/${singlePet.id}`, {
+				method: 'PATCH',
+				headers: { 'content-type': 'application/json' },
+				body: JSON.stringify({
+					likes: (likes += 1 || 1),
+				}),
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					setsinglePet(data);
+				});
+		}
    
     return (
         <>
         <div className="singleB">
         <div>
-            <h2>{singlePet.name}</h2>
             <img className="image" alt="#1" src={singlePet.image}/>
         </div>
          
          <div className="single">
+            <h1>About {singlePet.name}</h1>
+            <br />
+            <br />
             <div className="post-body">
-                <span className="text-by">By on 20/11/2022 </span>
                 <p className="text">
                 {singlePet.description}
                 </p>

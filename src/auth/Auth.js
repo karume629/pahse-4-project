@@ -34,91 +34,88 @@ export default function Auth({getUserData}){
       const onLoginSubmit = (loginData) => handleUserLogin(loginData);
       const onRegisterSubmit = (registerData) => handleUserRegistration(registerData);
 
-      function handleUserLogin(loginData){ 
-        fetch("http://localhost:3000/login", {
-            method: "POST",
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify(loginData)
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.error) {
-              sethasLoggedIn(false)
-              toast.error(`${data.error}`, {
-                  position: "top-center",
-                  autoClose: 5000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: false,
-                  progress: undefined,
-                  theme: "dark",
-              });
-            }
-            else{
-              getUserData(data)
-              console.log(data)
-              toast.success("Login success", {
-                  position: "top-center",
-                  autoClose: 5000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: false,
-                  progress: undefined,
-                  theme: "colored",
-              });
-              sessionStorage.setItem("user_id", JSON.stringify(data.id))
-              sethasLoggedIn(true)
-            }
-          })    
-        }
+      function handleUserLogin(loginData) {
+				fetch('https://pet-store-backend.onrender.com/login', {
+					method: 'POST',
+					headers: {
+						'content-type': 'application/json',
+					},
+					body: JSON.stringify(loginData),
+				})
+					.then((res) => res.json())
+					.then((data) => {
+						if (data.error) {
+							sethasLoggedIn(false);
+							toast.error(`${data.error}`, {
+								position: 'top-center',
+								autoClose: 5000,
+								hideProgressBar: false,
+								closeOnClick: true,
+								pauseOnHover: true,
+								draggable: false,
+								progress: undefined,
+								theme: 'dark',
+							});
+						} else {
+							getUserData(data);
+							console.log(data);
+							toast.success('Login success', {
+								position: 'top-center',
+								autoClose: 5000,
+								hideProgressBar: false,
+								closeOnClick: true,
+								pauseOnHover: true,
+								draggable: false,
+								progress: undefined,
+								theme: 'colored',
+							});
+							sessionStorage.setItem('user_id', JSON.stringify(data.id));
+							sethasLoggedIn(true);
+						}
+					});
+			}
 
-        function handleUserRegistration(registerData){
-            console.log(registerData);
-            fetch("http://localhost:3000/users", {
-            method: "POST",
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify(registerData)
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.error) {
-                    console.log(data);
-                    sethasLoggedIn(false)
-                    toast.error(`${data.error}`, {
-                        position: "top-center",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: false,
-                        progress: undefined,
-                        theme: "colored",
-                    });
-            }
-            else{
-                sethasLoggedIn(true)
-                sessionStorage.setItem("user_id", JSON.stringify(data.id))
-                getUserData(data)
-                toast.success(`Registration successfull.`, {
-                    position: "top-center",
-                    autoClose: 7000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: false,
-                    progress: undefined,
-                    theme: "colored",
-                });
-                
-            }
-          })         
-        }
+			function handleUserRegistration(registerData) {
+				console.log(registerData);
+				fetch('https://pet-store-backend.onrender.com/users', {
+					method: 'POST',
+					headers: {
+						'content-type': 'application/json',
+					},
+					body: JSON.stringify(registerData),
+				})
+					.then((res) => res.json())
+					.then((data) => {
+						if (data.error) {
+							console.log(data);
+							sethasLoggedIn(false);
+							toast.error(`${data.error}`, {
+								position: 'top-center',
+								autoClose: 5000,
+								hideProgressBar: false,
+								closeOnClick: true,
+								pauseOnHover: true,
+								draggable: false,
+								progress: undefined,
+								theme: 'colored',
+							});
+						} else {
+							sethasLoggedIn(true);
+							sessionStorage.setItem('user_id', JSON.stringify(data.id));
+							getUserData(data);
+							toast.success(`Registration successfull.`, {
+								position: 'top-center',
+								autoClose: 7000,
+								hideProgressBar: false,
+								closeOnClick: true,
+								pauseOnHover: true,
+								draggable: false,
+								progress: undefined,
+								theme: 'colored',
+							});
+						}
+					});
+			}
     
 
       if (hasLoggedIn) {

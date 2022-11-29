@@ -17,58 +17,60 @@ export default function New({addPet, currentUser}){
 
     return (
 			<>
-				<div className='formbold-main-wrapper'>
-					<div className='formbold-form-wrapper'>
-						<form onSubmit={handleSubmit(onSubmit)}>
-							<div className='formbold-mb-5'>
-								<label htmlFor='title' className='formbold-form-label'>
-									Add a new pet
-								</label>
-								<input
-									{...register('name')}
-									required='yes'
-									type='string'
-									id='title'
-									placeholder='Name'
-									className='formbold-form-input'
-								/>
-							</div>
-
-							<div className='formbold-mb-5'>
-								<label htmlFor='description' className='formbold-form-label'>
-									Pet description
-								</label>
-								<textarea
-									{...register('description')}
-									required='yes'
-									id='description'
-									placeholder='Description'
-									className='formbold-form-input'
-								></textarea>
-							</div>
-
-							<div className='formbold-mb-5'>
-								<label htmlFor='email' className='formbold-form-label'>
-									Pet image
-								</label>
-								<input
-									{...register('image')}
-									required='yes'
-									type='url'
-									placeholder='Image URL'
-									className='formbold-form-input'
-								/>
-							</div>
-
-							<div>
-								<br />
-								<button type='submit' className='formbold-btn w-full'>
-									Submit
-								</button>
-							</div>
-						</form>
-					</div>
+			<form className='new-pet' onSubmit={handleSubmit(onSubmit)}>
+				<br />
+				<br />
+				<div className='main-div'>
+					<label htmlFor='title' className='label'>
+						Add a new pet
+					</label>
+					<br />
+					<input
+						{...register('name')}
+						required='yes'
+						type='string'
+						placeholder='Name' 
+						className='input'
+					/>
 				</div>
+				<br />
+
+				<div className='main-div'>
+					<label className='label' htmlFor='description'>
+						Pet description
+					</label>
+					<br />
+					<textarea
+						{...register('description')}
+						required='yes'
+						id='description'
+						placeholder='Description' 
+						className='input-text'
+					></textarea>
+				</div>
+
+				<div className='main-div'>
+					<label className='label' htmlFor='email'>
+						Pet image
+					</label>
+					<br />
+					<input
+						{...register('image')}
+						required='yes'
+						type='url'
+						placeholder='Image URL' 
+						className='input'
+					/>
+				</div>
+				<br />
+
+				<div>
+					<br />
+					<button className='btn' type='submit'>
+						Submit
+					</button>
+				</div>
+			</form>
 			</>
 		);
 }

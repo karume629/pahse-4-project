@@ -3,12 +3,11 @@ import { useEffect, useState } from "react";
 export default function CommentList({id,  handleComments}) {
   const [singleComment, setsingleComment] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:3000/comments`)
-      .then((res) => res.json())
-      .then((data) => {
-        setsingleComment(data)
-        console.log(data);
-      });
+    fetch(`https://pet-store-backend.onrender.com/comments`)
+			.then((res) => res.json())
+			.then((data) => {
+				setsingleComment(data);
+			});
   }, []);
 
   const filteredComments = singleComment.filter((comment) => {
@@ -16,17 +15,21 @@ export default function CommentList({id,  handleComments}) {
     return comment.pet.id === id;
   });
 
+  console.log(filteredComments);
+
 
 
   return (
     <>
-      <h2>Comments</h2>
+      <h1>Comments</h1>
+      <br />
+      <br />
 
-      {filteredComments
+      {filteredComments.length !== 0
         ? filteredComments.map((comment) => {
             return <li className="text">{comment.comment}</li>
           })
-        : <p>No comment to display</p>}
+        : <p className="text">No comments yet!</p>}
  
 
     </>

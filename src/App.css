@@ -151,7 +151,7 @@ li{
 /* header */
 .header {
   background: var(--main-color);
-  padding: 2rem 10%;
+  padding: 1rem 10%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -224,7 +224,7 @@ li{
 
 /* home */
 .home {
-  min-height: 75.6vh;
+  height: 600px;
   display: flex;
   align-items: conter;
   background: url("https://www.ahdcvets.com/assets/mainstages/mainstage-v1-bg.jpg");
@@ -318,6 +318,10 @@ li{
   color: var(--white);
 }
 
+.menu .box-container .box:hover > h3{
+  color: var(--white);
+}
+
 
 
 .likes-btn{
@@ -400,8 +404,14 @@ li{
 /* end */
 
 /* Footer */
+
+
 .footer {
   background: var(--main-color);
+  position:absolute;
+  left:0;
+  bottom:0;
+  right:0;
 }
 
 .footer .credit {
@@ -661,7 +671,51 @@ form.sign-up-form {
   color: var(--input);
 }
 
+.input{
+  width: 450px;
+  height: 55px;
+  background: none;
+  border: 2px solid black;
+  border-radius: 4px;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--input);
+}
+
+.input-text{
+  width: 450px;
+  height: 155px;
+  background: none;
+  border: 2px solid black;
+  border-radius: 4px;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--input);
+}
+
+.input-comment{
+  width: 250px;
+  height: 155px;
+  background: none;
+  border: 2px solid black;
+  border-radius: 4px;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--input);
+}
+
+.label{
+  font-size: 1.7rem;
+}
+
 input:focus{
+  padding: 20px;
+}
+
+textarea:focus{
   padding: 20px;
 }
 
@@ -1056,21 +1110,15 @@ input:focus{
   }
 }
 
-textarea{
-  border: 2px solid black;
-}
+
 
 .singleB{
-  margin: 70px;
-  padding: 50px;
+  margin: 30px;
+  padding: 30px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   /* align-items: center; */
-}
-
-.single{
-  margin-left: 70px;
 }
 
 .singleB img{

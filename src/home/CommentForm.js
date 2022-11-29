@@ -8,8 +8,10 @@ export default function CommentForm({ handleComments }) {
   return (
     <>
       <form name="commentForm" onSubmit={submitComment}>
-        <h2>Add Comment</h2>
-        <textarea
+        <h1>Add Comment</h1>
+        <br />
+        <br />
+        <textarea className="input-comment"
           onChange={(e) => setNewComment(e.target.value)}
           cols="30"
           rows="10"
@@ -17,7 +19,7 @@ export default function CommentForm({ handleComments }) {
           required
         ></textarea>
         <br></br>
-        <input type="submit" value="Submit" />
+        <input className="btn" type="submit" value="Submit" />
       </form>
     </>
   );

@@ -2,7 +2,7 @@ import {Link} from "react-router-dom"
 
 export default function Hero({isAuthenticated}){
     return(
-        <div>
+        <div className="main-home">
             <section id="home" className="home">
                 <div className="content">
                     <h3>
@@ -14,6 +14,7 @@ export default function Hero({isAuthenticated}){
                     }
                 </div>
             </section>
+            
         </div>
     )
 }

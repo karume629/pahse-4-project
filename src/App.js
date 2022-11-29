@@ -20,113 +20,106 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
-    fetch("http://localhost:3000/pets")
-    .then(res => res.json())
-    .then(data => setPets(data))
+		fetch('https://pet-store-backend.onrender.com/pets')
+			.then((res) => res.json())
+			.then((data) => setPets(data));
 
-    const user_id = sessionStorage.getItem("user_id");
-    console.log(user_id);
+		const user_id = sessionStorage.getItem('user_id');
+		console.log(user_id);
 
-    fetch(`http://localhost:3000/users/${user_id}`)
-    .then((response) => {
-      console.log(response);
-      if (response.status === 200) {
-        response.json().then((user) => {
-          setIsAuthenticated(true);
-          setCurrentUser(user)
-        });
-      
-      }
-      else{
-        response.json().then(user => {
-          setIsAuthenticated(false);
-          setCurrentUser({})
-        })
-      }
-    });
+		fetch(`https://pet-store-backend.onrender.com/users/${user_id}`).then(
+			(response) => {
+				console.log(response);
+				if (response.status === 200) {
+					response.json().then((user) => {
+						setIsAuthenticated(true);
+						setCurrentUser(user);
+					});
+				} else {
+					response.json().then((user) => {
+						setIsAuthenticated(false);
+						setCurrentUser({});
+					});
+				}
+			},
+		);
+	}, []);
 
-  }, [])
+	function getUserData(user) {
+		setCurrentUser(user);
+		setIsAuthenticated(true);
+	}
 
+	function logout() {
+		sessionStorage.clear();
+		setIsAuthenticated(false);
+		setCurrentUser({});
+	}
 
-  function getUserData(user) {
-    setCurrentUser(user)
-    setIsAuthenticated(true)
-  }
+	function addPet(pet) {
+		fetch('https://pet-store-backend.onrender.com/pets', {
+			method: 'POST',
+			headers: {
+				'content-type': 'application/json',
+			},
+			body: JSON.stringify(pet),
+		}).then((res) => {
+			if (res.status === 422) {
+				res.json().then((data) => {
+					setErrors(true);
+					alert(data.error);
+				});
+			} else {
+				res.json().then((data) => {
+					setPets([data, ...pets]);
+					setErrors(false);
+					alert('Pet successfully created.');
+					navigate('/pets');
+				});
+			}
+		});
+	}
 
-  function logout(){
-    sessionStorage.clear()
-    setIsAuthenticated(false)
-    setCurrentUser({})
-  }
+	function editPet(myPet) {
+		let likes = parseInt(myPet.likes, 10);
+		fetch(`https://pet-store-backend.onrender.com/pets/${myPet.id}`, {
+			method: 'PATCH',
+			headers: {
+				'content-type': 'application/json',
+			},
+			body: JSON.stringify({
+				...myPet,
+				likes: (likes += 1 || 1),
+			}),
+		}).then((res) => {
+			if (res.status === 422) {
+				res.json().then((data) => {
+					setErrors(true);
+				});
+			} else {
+				res.json().then((data) => {
+					setPets([pets]);
+					setErrors(false);
+					navigate(`https://pet-store-backend.onrender.com/pets/${data.id}`);
+					window.location.reload();
+				});
+			}
+		});
+	}
 
-  function addPet(pet){
-    fetch("http://localhost:3000/pets", {
-      method: "POST",
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(pet)
-    })
-    .then(res => {
-      if (res.status === 422) {
-          res.json().then(data => {
-            setErrors(true)
-              alert(data.error)
-          })
-      }
-      else{
-          res.json().then(data => {
-            setPets([data, ...pets])
-            setErrors(false)
-            alert("Pet successfully created.")
-            navigate("/")
-          })
-      }
-  })
-  }
-
-  function editPet(myPet){
-    let likes = parseInt(myPet.likes, 10)
-    fetch(`http://localhost:3000/pets/${myPet.id}`, {
-      method: "PATCH",
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...myPet,
-        likes: likes += 1 || 1
-      })
-    })
-    .then(res => {
-      if (res.status === 422) {
-          res.json().then(data => {
-              setErrors(true)
-          })
-      }
-      else{
-          res.json().then(data => {
-            setPets([pets])
-            setErrors(false)
-            navigate(`http://localhost:3000/pets/${data.id}`)
-            window.location.reload()
-          })
-      }
-  })
-  }
-
-  function deleteProduct(product){
-    fetch(`http://localhost:3000/pets/${product.id}`, {
-      method: 'DELETE',
-      headers: {
-        'content-type': 'application/json',
-      }
-    })
-    .then(res => res.json())
-    .then(data => {
-      navigate("/")
-      window.location.reload()
-    })
-  }
+	function deleteProduct(product) {
+		fetch(`https://pet-store-backend.onrender.com/pets/${product.id}`, {
+			method: 'DELETE',
+			headers: {
+				'content-type': 'application/json',
+			},
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				navigate('/');
+				window.location.reload();
+			});
+	}
 
   return (
     <div className="App">

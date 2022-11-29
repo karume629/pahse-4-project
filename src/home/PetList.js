@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function PetList({name, image, likes, editPet, pet, id}){
+export default function PetList({name, image, likes, id}){
     return (
 			<>
 				<Link to={`/pets/${id}`}>
@@ -9,7 +9,6 @@ export default function PetList({name, image, likes, editPet, pet, id}){
 						<h3>{name}</h3>
 						<div className='likes'>
 							<button
-								onClick={() => editPet(pet)}
 								className='likes-btn'
 								type='button'
 							>

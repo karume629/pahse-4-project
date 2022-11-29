@@ -5,7 +5,7 @@ export default function Nav({isAuthenticated, logout, currentUser}){
 			<div>
 				<header className='header'>
 					<Link to='/' className='logo'>
-						<img
+						<img style={{borderRadius: "50%"}}
 							src='https://icon2.cleanpng.com/20180221/eqw/kisspng-dog-tag-cat-pet-pet-footprints-logo-5a8e35a8643669.3161012915192692884105.jpg'
 							alt='Pets'
 							width='70'
@@ -47,6 +47,8 @@ export default function Nav({isAuthenticated, logout, currentUser}){
 									className='rounded-circle'
 								/>
 								{currentUser.username}
+								<br />
+								{currentUser.email}
 							</button>
 							<button className='logout' onClick={logout}>
 								Logout
