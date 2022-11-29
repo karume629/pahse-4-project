@@ -103,8 +103,10 @@ li{
   font-weight: bold;
   border-radius: 2rem;
   font-size: 1.5rem;
-  background-color: var(--white);;
+  background-color: var(--white);
+  cursor: pointer;
 }
+
 
 .btn {
   display: inline-block;

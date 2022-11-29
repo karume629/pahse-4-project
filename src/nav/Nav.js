@@ -36,6 +36,7 @@ export default function Nav({isAuthenticated, logout, currentUser}){
 									display: 'flex',
 									alignItems: 'center',
 									marginRight: '10px',
+									cursor: 'default',
 								}}
 								type='button'
 							>
