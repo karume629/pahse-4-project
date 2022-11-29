@@ -9,6 +9,7 @@ import Pet from './home/Pet';
 import Footer from './nav/Footer';
 import Auth from './auth/Auth';
 import New from './home/New';
+import SinglePet from './home/SinglePet';
 
 
 function App() {
@@ -23,7 +24,12 @@ function App() {
     .then(res => res.json())
     .then(data => setPets(data))
 
-    fetch("http://localhost:3000/me").then((response) => {
+    const user_id = sessionStorage.getItem("user_id");
+    console.log(user_id);
+
+    fetch(`http://localhost:3000/users/${user_id}`)
+    .then((response) => {
+      console.log(response);
       if (response.status === 200) {
         response.json().then((user) => {
           setIsAuthenticated(true);
@@ -73,6 +79,7 @@ function App() {
             setPets([data, ...pets])
             setErrors(false)
             alert("Pet successfully created.")
+            navigate("/")
           })
       }
   })
@@ -128,6 +135,7 @@ function App() {
         <Route exact path="/" element={<Home isAuthenticated={isAuthenticated} />}/>
         <Route exact path="/new" element={<New currentUser={currentUser} addPet={addPet} />}/>
         <Route exact path="/pets" element={<Pet editPet={editPet} pets={pets} />}/>
+        <Route exact path="/pets/:id" element={<SinglePet currentUser={currentUser} />}/>
         <Route exact path="/authentication" element={<Auth getUserData={getUserData} />}/>
       </Routes>
       <Footer />

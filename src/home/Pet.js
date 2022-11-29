@@ -11,8 +11,8 @@ export default function Pet({pets, editPet}){
                 
                 {
                     pets.map(pet => {
-                        return <PetList name={pet.name} likes={pet.likes} description={pet.description} 
-                        user={pet.user} image={pet.image} editPet={editPet} pet={pet} />
+                        return <PetList key={pet.id} name={pet.name} likes={pet.likes} description={pet.description} 
+                        user={pet.user} image={pet.image} editPet={editPet} pet={pet} id={pet.id} />
                     })
                 }
                 

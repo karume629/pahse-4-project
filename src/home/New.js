@@ -15,54 +15,60 @@ export default function New({addPet, currentUser}){
       addPet(newData)
     }
 
-    return(
-        <>
-        <div class="formbold-main-wrapper">
-        <div class="formbold-form-wrapper">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div class="formbold-mb-5">
-              <label for="title" class="formbold-form-label">
-                Add a new pet
-              </label>
-              <input {...register("name")} 
-              required="yes" 
-                type="string"
-                id="title"
-                placeholder="Name"
-                class="formbold-form-input"
-              />
-            </div>
+    return (
+			<>
+				<div className='formbold-main-wrapper'>
+					<div className='formbold-form-wrapper'>
+						<form onSubmit={handleSubmit(onSubmit)}>
+							<div className='formbold-mb-5'>
+								<label htmlFor='title' className='formbold-form-label'>
+									Add a new pet
+								</label>
+								<input
+									{...register('name')}
+									required='yes'
+									type='string'
+									id='title'
+									placeholder='Name'
+									className='formbold-form-input'
+								/>
+							</div>
 
-            <div class="formbold-mb-5">
-              <label for="description" class="formbold-form-label">
-                Pet description
-              </label>
-              <textarea {...register("description")} 
-              required="yes" 
-                id="description"
-                placeholder="Description"
-                class="formbold-form-input"></textarea>
-            </div>
+							<div className='formbold-mb-5'>
+								<label htmlFor='description' className='formbold-form-label'>
+									Pet description
+								</label>
+								<textarea
+									{...register('description')}
+									required='yes'
+									id='description'
+									placeholder='Description'
+									className='formbold-form-input'
+								></textarea>
+							</div>
 
-            <div class="formbold-mb-5">
-              <label for="email" class="formbold-form-label">
-                Pet image
-              </label>
-              <input {...register("image")} 
-              required="yes" 
-                type="url"
-                placeholder="Image URL"
-                class="formbold-form-input"
-              />
-            </div>
-      
-            <div>
-            <br />
-              <button type="submit" class="formbold-btn w-full">Submit</button>
-            </div>
-          </form>
-        </div>
-      </div>
-        </>
-    )
+							<div className='formbold-mb-5'>
+								<label htmlFor='email' className='formbold-form-label'>
+									Pet image
+								</label>
+								<input
+									{...register('image')}
+									required='yes'
+									type='url'
+									placeholder='Image URL'
+									className='formbold-form-input'
+								/>
+							</div>
+
+							<div>
+								<br />
+								<button type='submit' className='formbold-btn w-full'>
+									Submit
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</>
+		);
 }

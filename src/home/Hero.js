@@ -9,7 +9,7 @@ export default function Hero({isAuthenticated}){
                     KATE'S PET PLANET
                     </h3>
                     {
-                        isAuthenticated ? <Link to="/menu" className="btn">View Pets</Link> 
+                        isAuthenticated ? <Link to="/pets" className="btn">View Pets</Link> 
                         : <Link to="/authentication" className="btn">Login</Link>
                     }
                 </div>
